@@ -70,11 +70,13 @@ export class MarkersPageComponent {
       .addTo(this.map);
     this.markers.push({ color: color, marker: marker });
     this.saveToLocalStorage();
+    marker.on('dragend', () => this.saveToLocalStorage());
   }
 
   deleteMarker(index: number) {
     this.markers[index].marker.remove();
     this.markers.splice(index, 1);
+    this.saveToLocalStorage();
   }
 
   flyTo(marker: Marker) {
